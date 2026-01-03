@@ -1,6 +1,8 @@
 # EC2 Instance Scheduler
 
-A highly modular, containerized AWS Lambda function designed to manage EC2 instance states (Start/Stop) across multiple AWS accounts and regions. Built with Python 3.12+, Pydantic, and AWS SDK (Boto3).
+A highly modular, containerized AWS Lambda function designed to manage EC2 instance states (Start/Stop). Built with Python 3.12+, Pydantic, and AWS SDK (Boto3).
+
+This repository is a component of the [hyoacloud-aws-infrastructure](https://github.com/hyoaru/hyoacloud-aws-infrastructure) ecosystem.
 
 ## Architecture
 
@@ -41,13 +43,19 @@ This project uses a Strategy Design Pattern to allow for flexible instance selec
 
 ```Bash
 git clone <repo-url>
-cd serverless-instance-scheduler
+cd serverless-office-hour-instance-scheduler
 ```
 
 2. Install dependencies (using uv):
 
 ```Bash
 uv sync
+```
+
+3. Run the Lambda locally: You can execute the handler directly using uv but configure the code to mock the event and context
+
+```Bash
+uv run lambda
 ```
 
 ## CI/CD & Deployment
