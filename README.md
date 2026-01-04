@@ -37,25 +37,31 @@ This project uses a Strategy Design Pattern to allow for flexible instance selec
 - AWS CLI configured with appropriate permissions.
 - uv (For local dependency management).
 
-### Local Development
+### Local Development and Testing
 
 1. Clone the repo:
 
 ```Bash
 git clone <repo-url>
-cd serverless-office-hour-instance-scheduler
+cd serverless-office-hours-instance-scheduler
 ```
 
-2. Install dependencies (using uv):
+2. Run with Docker Compose
+
+The easiest way to test is using the provided docker-compose.yml.
 
 ```Bash
-uv sync
+docker compose up -d
 ```
 
-3. Run the Lambda locally: You can execute the handler directly using uv but configure the code to mock the event and context
+3. Test the Lambda Function
+
+While the containers are running, open a new terminal and send a mock payload to the Lambda endpoint. The Runtime Interface Emulator (RIE) translates this HTTP request into the event and context objects your Python code expects.
 
 ```Bash
-uv run lambda
+# Invoke the Lambda to STOP instances
+curl "http://localhost:9000/2015-03-31/functions/function/invocations" \
+  -d '{"action": "STOP"}'
 ```
 
 ## CI/CD & Deployment
@@ -64,7 +70,7 @@ This repository is decoupled from the main monorepo. Deployment is handled via G
 
 ### Deployment Workflow
 
-1. Push to main: Triggers the GitHub Action.
+1. Push to master: Triggers the GitHub Action.
 2. Docker Build: Builds the Lambda-ready image using the provided Dockerfile.
 3. ECR Push: Authenticates via OIDC and pushes the image to Amazon ECR.
 4. Lambda Update: Updates the CloudFormation stack/Lambda function with the new :latest or :sha image tag.
