@@ -50,4 +50,5 @@ jobs:
       environment: ${{ needs.setup-environment.outputs.environment }}
       region: ${{ vars.AWS_REGION }}
       repository: ${{ vars.AWS_ECR_REPOSITORY }}
+      role: ${{ vars.AWS_IAM_ROLE }}
     secrets: inherit
