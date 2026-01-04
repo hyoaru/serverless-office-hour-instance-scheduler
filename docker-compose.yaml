@@ -1,0 +1,8 @@
+services:
+  lambda:
+    build: .
+    container_name: serverless-office-hours-instance-scheduler
+    ports:
+      - "9000:8080"
+    env_file:
+      - .env
