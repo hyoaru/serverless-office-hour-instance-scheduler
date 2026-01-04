@@ -9,6 +9,9 @@ env:
   AWS_ECR_REPOSITORY: serverless-office-hours-instance-scheduler
   AWS_IAM_ROLE: core-AWSFederatedRoleForGithubActions
 
+permissions:
+  id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
